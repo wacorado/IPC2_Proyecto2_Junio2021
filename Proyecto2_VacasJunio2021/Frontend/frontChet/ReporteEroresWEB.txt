@@ -1,0 +1,4 @@
+Error en Nombre: Daniel3 Registro #: 4
+Error en edad: 32 años Registro #: 11
+Error en formato Fecha: 1993/7/22 Registro #: 11
+Error en formato Fecha: 1993/7/22 Registro #: 11
