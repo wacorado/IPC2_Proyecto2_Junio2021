@@ -1,0 +1,5 @@
+Error en Nombre: Daniel3 Registro #: 4
+Error en Apellido: Orella4na Registro #: 9
+Error en edad: 32 años Registro #: 12
+Error en formato Fecha: 1993/7/22 Registro #: 12
+Error en formato Fecha: 1993/7/22 Registro #: 12

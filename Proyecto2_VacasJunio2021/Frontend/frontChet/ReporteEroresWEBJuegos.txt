@@ -1,0 +1,6 @@
+Error en Nombre de Juego: Minecr@ft Registro #: 2
+Error en Nombre de Juego: Minecr@ft Registro #: 3
+Error en Año de Lanzamiento de Juego: Año 2012 Registro #: 3
+Error en Clasificacion de Juego: Clasificacion E Registro #: 10
+Error en Nombre de Juego: The Elded Scrolls V: Skyrim Registro #: 12
+Error en Nombre de Juego: The Legend of Zelda: Ocarina of Time Registro #: 14

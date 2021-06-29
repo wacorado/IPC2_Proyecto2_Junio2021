@@ -1,0 +1,4 @@
+Error en Nombre Mejor Cliente: Juan Registro #: 7
+Error en formato Fecha Ultima Compra: 2020/12/18 Registro #: 9
+Error en Cantidad: 3 Juegos Registro #: 12
+Error en Formato de Monto Gastado: Q.3000 Registro #: 14
