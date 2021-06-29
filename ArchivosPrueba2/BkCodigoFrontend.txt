@@ -1,0 +1,11 @@
+# print("-------- Nueva Lista ---------")
+        # for i in listaClientesCsv.returnClientes():
+        #     print("Nombre: {}, Apellido: {}, Edad: {}, FechaNacimiento: {}, FechaPrimeraCompra: {}".format(i.nombre,i.apellido,i.edad,i.fechaNac,i.fechaPrimeraCompra))
+        #archivoCsvClientes=urlCsvClientes.read()
+        #dataCsvClientes=csv.DictReader(urlCsvClientes)
+        #listaCSVTemp=[]
+        #for i in dataCsvClientes:
+            #listaCSVTemp.append(i)
+        #aqui proceso el CSV para convertir en XML
+        #for x in listaCSVTemp:
+            #print(x)

@@ -17,7 +17,7 @@ def hello():
 @app.route('/clientes-xml', methods = ['POST'])
 def post_ClientesXML():
     global strBkpReturn
-    # clientes=[]
+    clientes=[]
     # mejoresClientes=[]
     # juegos=[]
     # juegosVendidos=[]
@@ -26,10 +26,34 @@ def post_ClientesXML():
     strBkpReturn=request.data.decode('UTF-8')
     #print(str(str_Archivo))
     raiz = ET.fromstring(str_Archivo)
+    #root=tree.getroot()
+    for elemento in raiz:
+        print("-----------------------"+elemento.tag+"---------------------")
+        if(elemento.tag=="Clientes"):
+            for clientes in elemento:
+                print("-------------------"+clientes.tag+"-------------------------")
+                for datosCliente in clientes:
+                    if(datosCliente.tag=="Nombre"):
+                        print(datosCliente.text)
+                        nombre=datosCliente.text
+                    elif(datosCliente.tag=="Apellido"):
+                        print(datosCliente.text)
+                        apellido=datosCliente.text
+                    elif(datosCliente.tag=="Edad"):
+                        print(datosCliente.text)
+                        edad=datosCliente.text
+                    elif(datosCliente.tag=="FechaCumpleaños"):
+                        print(datosCliente.text)
+                        fechaCumple=datosCliente.text
+                    elif(datosCliente.tag=="FechaPrimeraCompra"):
+                        print(datosCliente.text)
+                        fechaPrimeraCompra=datosCliente.text
+                clientes.append([nombre,apellido,edad,fechaCumple,fechaPrimeraCompra])
+                    
+                    
 
-
-    for hijo in raiz:
-        print("------------hijo.tag ------------------")
+    #for hijo in raiz:
+    #    print("------------hijo.tag ------------------")
     #     if(hijo.tag()=="cliente")
     #     #print("---------------------"+hijo.tag+"--------------------------")
     #     if(hijo.tag == "cliente"):

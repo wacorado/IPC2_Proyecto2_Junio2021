@@ -1,0 +1,4 @@
+Error en Nombre de Juego Mas Vendido : L@L Registro #: 2
+Error en formato Fecha Ultima COmpra: 2019/06/06 Registro #: 5
+Error en Cantidad de Copias Vendidas: 5 Unidades Registro #: 7
+Error en Estock de Ventas: 2000 unidades Registro #: 11
