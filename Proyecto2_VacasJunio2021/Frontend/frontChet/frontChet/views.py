@@ -5,6 +5,7 @@ import csv
 import re
 from xml.dom import minidom
 import xml.etree.ElementTree as ET
+import json
 
 class listaClientes:
     def __init__(self):
@@ -445,7 +446,7 @@ def procesarCSVClientes(request):
         rqt.post('http://localhost:5000/clientes-xml',xml_file)
     return redirect('principal')
 
-def Reportes(request):
+def Reportes(request,**kwargs):
     global xml_ReportesFrontend
     listaMejoresClientesRepo=[]
     listaJuegosMasVendidoRepo=[]
@@ -539,13 +540,47 @@ def Reportes(request):
     print("\n-------------- listaJugos ---------------\n")
     for i in listaJuegosRepo:
         print(i)
+
+
+    #Aqui Genero Data que Mandare a Grafica Barras Mejores Clientes
+    cadenaNombres=""
+    listaNombres=[]
+    dataTotalesGastado=[]
+    tamañolista=len(listaMejoresClientesRepo)
+    #print(tamañolista)
+    for x in range(len(listaMejoresClientesRepo)):
+        for y in range(len(listaMejoresClientesRepo[x])):
+            if(y==0):
+                if(x==(tamañolista-1)):
+                    print("Valido que verifique la ultima cocatenacion ")
+                    cadenaNombres=cadenaNombres+"\'"+str(listaMejoresClientesRepo[x][y])+"\'"
+                else:
+                    cadenaNombres=cadenaNombres+"\'"+str(listaMejoresClientesRepo[x][y])+"\',\n"
+                listaNombres.append(listaMejoresClientesRepo[x][y])
+            if(y==1):
+                dataTotalesGastado.append(float(listaMejoresClientesRepo[x][y]))
+    print(listaNombres)
+    #print(cadenaNombres)
+    print(str(dataTotalesGastado))
+
+    # ------------------------------- Aqui genero data para Pie Juegos mas Comprados -------------------------------
+    listaJuegosMasVendidosGrafica=[]
+    total=0
+    for x in range(len(listaJuegosMasVendidoRepo)):
+        total=total+int(listaJuegosMasVendidoRepo[x][2])
+    print(total)
+
+    for x in range(len(listaJuegosMasVendidoRepo)):
+        porcentajeTotal=00.00
+        porcentajeTotal=((float(str(listaJuegosMasVendidoRepo[x][2]))*100)/total)
+        porcentajeGrafica=round(porcentajeTotal,2)
+        diccionarioValoresGrafica={'name': str(listaJuegosMasVendidoRepo[x][0])+ ' AñoLanzamiento: '+str(listaJuegosMasVendidoRepo[x][1]),'y':porcentajeGrafica}
+        listaJuegosMasVendidosGrafica.append(diccionarioValoresGrafica)
+    print(listaJuegosMasVendidosGrafica)
     
-
-
-        
-
-                
-    context={'ReporteData':strxml_ReportesFrontend}
+    
+    #context={'ReporteData':strxml_ReportesFrontend}
+    context={'ReporteData':strxml_ReportesFrontend,'dataTotalesGastado':json.dumps(dataTotalesGastado),'nombresClientes':json.dumps(listaNombres),'dataPie':json.dumps(listaJuegosMasVendidosGrafica)}
     return render(request,'Reportes.html',context)
 
 def verXmlReporte(request):
