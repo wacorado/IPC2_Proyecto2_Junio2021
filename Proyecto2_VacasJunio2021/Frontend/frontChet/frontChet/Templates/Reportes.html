@@ -61,13 +61,42 @@
         </p>
     </figure>
 
+    <figure class="highcharts-figure">
+        <div id="clasificacionesBar"></div>
+        <p class="highcharts-description">
+    
+        </p>
+    </figure>
+
+    <div class="row">
+        <ul class="list-group">
+            <li class="list-group-item">----------Stock de Juegos en Chet--------------------</li>
+        
+        
+            <li class="list-group-item list-group-item-primary">{{cadenaMayores|safe}}</li>
+            <li class="list-group-item list-group-item-danger">{{cadenaMenores|safe}}</li>
+        </ul>
+    </div>
+    <br>
+
+    <div class="row">
+        <ul class="list-group">
+            <li class="list-group-item">------------------------ Fechas de Nacimiento Clientes -----------------</li>
+    
+    
+            <li class="list-group-item list-group-item-info">{{cadenaNac}}</li>
+        </ul>
+    </div>
         
         
         
         <script type="text/javascript">
+        
             var dataTotalesGastado = JSON.parse("{{ dataTotalesGastado|escapejs }}");
             var nombresClientes= JSON.parse("{{ nombresClientes|escapejs }}");
             var dataPie=JSON.parse("{{dataPie|escapejs}}")
+            var clasificaciones=JSON.parse("{{clasificaciones|escapejs}}")
+            var cantCalasificacioens= JSON.parse("{{ cantCalasificacioens|escapejs }}");
             Highcharts.chart('containerBarras', {
                     chart: {
                         type: 'column'
@@ -145,6 +174,51 @@
                         name: 'Juego',
                         colorByPoint: true,
                         data: dataPie
+                    }]
+                });
+            
+            Highcharts.chart('clasificacionesBar', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Grafico de Clasificaciones de Juegos Mas Vendidas'
+                    },
+                    subtitle: {
+                        text: 'Fuente: Elaboracion Propia'
+                    },
+                    xAxis: {
+
+                        categories: clasificaciones,
+                        crosshair: true
+                    },
+                    yAxis: {
+                        min: 00,
+                        title: {
+                            text: 'Cantidad de Copias Vendidas'
+                        }
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.2,
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: 'Cant.',
+                        showInLegend: false,
+                        colorByPoint: true,
+                        data: cantCalasificacioens
+
+
                     }]
                 });
 

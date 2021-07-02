@@ -7,13 +7,16 @@ from werkzeug.wrappers import Response
 from datetime import date
 from xml.dom import minidom
 import requests as rqt
+from datetime import datetime
+
 
 
 strBkpReturn=''
 str_Archivo=''
 xml_Reportesfinal=''
 
-
+def ordenarFecha(elem):
+    return datetime.strptime(elem[1], '%d/%m/%Y')
 app = Flask(__name__)
 
 @app.route('/')
@@ -208,9 +211,11 @@ def post_ClientesXML():
 
     listaReporteCumpleañeros=[]
     for x in range(len(listaclientes)):
-        listaReporteCumpleañeros.append([(str(listaclientes[x][0]+" "+str(listaclientes[x][1]))),str(listaclientes[x][3])])
-    tempFechas=sorted(listaReporteCumpleañeros, key = lambda x:  str(x[1]))
-    listaReporteCumpleañerosOrdenada=list(reversed(tempFechas))
+        listaReporteCumpleañeros.append([(str(listaclientes[x][0]+" "+(listaclientes[x][1]))),str(listaclientes[x][3])])
+    listaReporteCumpleañeros.sort(key=ordenarFecha)
+    #tempFechas=sorted(listaReporteCumpleañeros, key =ordenarFecha)
+    #listaReporteCumpleañerosOrdenada=list(reversed(tempFechas))
+    listaReporteCumpleañerosOrdenada=listaReporteCumpleañeros
 
     #---------- Aqui se Genera el Reporte de Juegos ---------------
     listaReporteJuegos=[]

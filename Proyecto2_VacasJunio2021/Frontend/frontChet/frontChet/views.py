@@ -1,3 +1,4 @@
+from typing import ByteString
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import requests as rqt
@@ -6,6 +7,8 @@ import re
 from xml.dom import minidom
 import xml.etree.ElementTree as ET
 import json
+from datetime import datetime
+
 
 class listaClientes:
     def __init__(self):
@@ -25,6 +28,9 @@ class Cliente:
 
 listaClientesCsv=listaClientes()
 xml_ReportesFrontend=''
+cadenaCSV=''
+
+
     
 def Saludo(request):
     return HttpResponse("Hola Mundo Prueba Cruel")
@@ -32,12 +38,13 @@ def Saludo(request):
 def principal(request):
     xml_return=rqt.get('http://localhost:5000/returnXMLCompleto')
     xml_returnSTR=xml_return.text
-    context={'xmlTotal':xml_returnSTR}
+    context={'xmlTotal':xml_returnSTR,'csvTotal':cadenaCSV}
     #context={'xmlTotal':rqt.get('http://localhost:5000/returnXMLCompleto').text}
     return render(request,'index.html',context)
     #return render(request,'index.html')
 
 def procesarCSVClientes(request):
+    global cadenaCSV
     lista1Clientes=[]
     listaPosErrores=[]
     listaMejoresClientes=[]
@@ -54,6 +61,9 @@ def procesarCSVClientes(request):
         urlCsvClientes=request.FILES['clientes'].read().decode('utf-8').splitlines()
         print("------------------------------- Clientes ----------------------------------------")
         #print(urlCsvClientes)
+        for i in urlCsvClientes:
+            cadenaCSV=cadenaCSV+str(i)+"\n"
+        #print(cadenaCSV)
         reader = csv.reader(urlCsvClientes, delimiter=';')
         #print("-------- Comprobar Lectura de CSV ------------")
         for i in reader:
@@ -132,6 +142,9 @@ def procesarCSVClientes(request):
         #------------------ a partir de aqui proceso el de Mejores Clientes -------------------------------------------
         file = open ("ReporteEroresWEBMejoresClientes.txt","w")
         urlCsvMejoresClientes=request.FILES['mejoresClientes'].read().decode('utf-8').splitlines()
+        cadenaCSV=cadenaCSV+"\n----------------------------------------- \n"
+        for i in urlCsvMejoresClientes:
+            cadenaCSV=cadenaCSV+str(i)+"\n"
         print("-------------------- Mejores Clientes --------------------------------------")
         #print(urlCsvMejoresClientes)
         readerMejoresClientes = csv.reader(urlCsvMejoresClientes,delimiter=";")
@@ -203,6 +216,10 @@ def procesarCSVClientes(request):
         # --------------------------- a partir de aqui proceso archivo Juegos -------------------------------------------
         file=open("ReporteEroresWEBJuegos.txt","w")
         urlCsvJuegos=request.FILES['juegos'].read().decode('utf-8').splitlines()
+        cadenaCSV=cadenaCSV+"\n ----------------------------------------- \n"
+        for i in urlCsvJuegos:
+            cadenaCSV=cadenaCSV+str(i)+"<br>"
+        
         print("-------------------- Juegos --------------------------------------")
         readerJuegos = csv.reader(urlCsvJuegos,delimiter=";")
         for i in readerJuegos:
@@ -275,6 +292,9 @@ def procesarCSVClientes(request):
         #---------------- a partir de aqui proceso el Archivo JuegosmasVendidos --------------------------------------------
         file=open("ReporteErroresWEBJuegosMasVendidos.txt","w")
         urlCsvJuegosMasVendidos=request.FILES['juegosMasVendidos'].read().decode('utf-8').splitlines()
+        cadenaCSV=cadenaCSV+"\n----------------------------------------- \n"
+        for i in urlCsvJuegosMasVendidos:
+            cadenaCSV=cadenaCSV+str(i)+"\n"
         print("----------------------- Juegos Mas Vendidos ----------------------------")
         readerJuegosMasVendidos=csv.reader(urlCsvJuegosMasVendidos, delimiter=";")
         for i in readerJuegosMasVendidos:
@@ -334,7 +354,7 @@ def procesarCSVClientes(request):
         for i in listaJuegosMasVendidos:
             print(i)
 
-       
+
         #Escribo la parte de Clientes en el XML
         #Escribo el XML los Clientes
         document=minidom.Document()
@@ -577,10 +597,52 @@ def Reportes(request,**kwargs):
         diccionarioValoresGrafica={'name': str(listaJuegosMasVendidoRepo[x][0])+ ' AñoLanzamiento: '+str(listaJuegosMasVendidoRepo[x][1]),'y':porcentajeGrafica}
         listaJuegosMasVendidosGrafica.append(diccionarioValoresGrafica)
     print(listaJuegosMasVendidosGrafica)
+
+    #------------ Aqui genero Data para Grafica en JS de Clasificaciones mas Vendidas ---------------
+    listaClasificacionGaf=[]
+    listaCantClasificacionGraf=[]
+    for x in range(len(listaClasificacionRepo)):
+        listaClasificacionGaf.append((listaClasificacionRepo[x][0]))
+        listaCantClasificacionGraf.append(int(listaClasificacionRepo[x][1]))
+    print(listaCantClasificacionGraf)
+    print(listaClasificacionGaf)
+
+    #------------------- Aqui genero las info para enviar a listado de Juegos:
+
+    cadenaMayores=''
+    cadenaMenores=''
+    formDato=''
+    listaMayores=[]
+    for x in range(len(listaJuegosRepo)):
+        if(int(listaJuegosRepo[x][1])<=10):
+            formDato='Juego: '+str(listaJuegosRepo[x][0])+' - Cantidad Disponible: '+str(listaJuegosRepo[x][1])+' unidades <br>'
+            cadenaMenores=cadenaMenores+formDato
+        else:
+            formDato='Juego: '+str(listaJuegosRepo[x][0])+' - Cantidad Disponible: '+str(listaJuegosRepo[x][1])+' unidades <br>'
+            cadenaMayores=cadenaMayores+formDato
+            listaMayores.append(formDato)
     
-    
+    #print(cadenaMayores)
+    # ------------- Aqui genero la data para Fechas de Nacimiento ---------------
+    cadenaCumpleaños=''
+    formatoDataCumples=''
+    listaNac=[]
+    for x in range(len(listaCumpleañerosRepo)):
+        formatoDataCumples='Nombre: '+str(listaCumpleañerosRepo[x][0])+' - Fecha de Nacimiento: '+str(listaCumpleañerosRepo[x][1])+' <br>'
+        dicionarioCumples={'Nombre': str(listaCumpleañerosRepo[x][0]), 'fecha': str(listaCumpleañerosRepo[x][1])}
+        listaNac.append(dicionarioCumples)
+        cadenaCumpleaños=cadenaCumpleaños+formatoDataCumples
+
+
+
     #context={'ReporteData':strxml_ReportesFrontend}
-    context={'ReporteData':strxml_ReportesFrontend,'dataTotalesGastado':json.dumps(dataTotalesGastado),'nombresClientes':json.dumps(listaNombres),'dataPie':json.dumps(listaJuegosMasVendidosGrafica)}
+    context={'ReporteData':strxml_ReportesFrontend,
+    'dataTotalesGastado':json.dumps(dataTotalesGastado),'nombresClientes':json.dumps(listaNombres),
+    'dataPie':json.dumps(listaJuegosMasVendidosGrafica),
+    'clasificaciones':json.dumps(listaClasificacionGaf),'cantCalasificacioens':json.dumps(listaCantClasificacionGraf),
+    'cadenaMayores':cadenaMayores,'cadenaMenores':cadenaMenores,
+    'cadenaNac':cadenaCumpleaños
+    }
     return render(request,'Reportes.html',context)
 
 def verXmlReporte(request):

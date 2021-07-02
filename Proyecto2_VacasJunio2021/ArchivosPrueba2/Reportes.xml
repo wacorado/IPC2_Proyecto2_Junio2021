@@ -1,0 +1,148 @@
+  <Reportes>
+	<ReporteMejoresClientes>
+		<MejorCliente>
+			<Nombre>Jose</Nombre>
+			<CantidadGastada>11500.0</CantidadGastada>
+		</MejorCliente>
+		<MejorCliente>
+			<Nombre>Zenaida </Nombre>
+			<CantidadGastada>3000.0</CantidadGastada>
+		</MejorCliente>
+		<MejorCliente>
+			<Nombre>Walther</Nombre>
+			<CantidadGastada>1500.5</CantidadGastada>
+		</MejorCliente>
+		<MejorCliente>
+			<Nombre>Xhunik</Nombre>
+			<CantidadGastada>1000.05</CantidadGastada>
+		</MejorCliente>
+		<MejorCliente>
+			<Nombre>Juan Gaitan</Nombre>
+			<CantidadGastada>1000.0</CantidadGastada>
+		</MejorCliente>
+		<MejorCliente>
+			<Nombre>Pablo Ramirez</Nombre>
+			<CantidadGastada>950.0</CantidadGastada>
+		</MejorCliente>
+		<MejorCliente>
+			<Nombre>Eduardo </Nombre>
+			<CantidadGastada>750.0</CantidadGastada>
+		</MejorCliente>
+		<MejorCliente>
+			<Nombre>Abdul</Nombre>
+			<CantidadGastada>235.0</CantidadGastada>
+		</MejorCliente>
+		<MejorCliente>
+			<Nombre>Daniel</Nombre>
+			<CantidadGastada>150.0</CantidadGastada>
+		</MejorCliente>
+	</ReporteMejoresClientes>
+	<ReporteJuegosMasVendidos>
+		<JuegoMasVendido>
+			<Nombre>Mario kart</Nombre>
+			<AñoLanzamiento>1998</AñoLanzamiento>
+			<CopiasVendidas>2000</CopiasVendidas>
+		</JuegoMasVendido>
+		<JuegoMasVendido>
+			<Nombre>Minecraft</Nombre>
+			<AñoLanzamiento>2012</AñoLanzamiento>
+			<CopiasVendidas>50</CopiasVendidas>
+		</JuegoMasVendido>
+	</ReporteJuegosMasVendidos>
+	<ReporteClasificaciónes>
+		<Clacificación>
+			<TipoClasificación>T</TipoClasificación>
+			<Cantidad>3</Cantidad>
+		</Clacificación>
+		<Clacificación>
+			<TipoClasificación>E</TipoClasificación>
+			<Cantidad>3</Cantidad>
+		</Clacificación>
+		<Clacificación>
+			<TipoClasificación>M</TipoClasificación>
+			<Cantidad>1</Cantidad>
+		</Clacificación>
+		<Clacificación>
+			<TipoClasificación>A</TipoClasificación>
+			<Cantidad>1</Cantidad>
+		</Clacificación>
+	</ReporteClasificaciónes>
+	<ReporteCumpleañeros>
+		<ClienteCumpleaños>
+			<Nombre>Daniel Marroquin</Nombre>
+			<FechaNacimiento>8/12/2021</FechaNacimiento>
+		</ClienteCumpleaños>
+		<ClienteCumpleaños>
+			<Nombre>Walther Corado</Nombre>
+			<FechaNacimiento>8/08/1993</FechaNacimiento>
+		</ClienteCumpleaños>
+		<ClienteCumpleaños>
+			<Nombre>Maria Andrea Orellana</Nombre>
+			<FechaNacimiento>8/02/1998</FechaNacimiento>
+		</ClienteCumpleaños>
+		<ClienteCumpleaños>
+			<Nombre>Zenaida  García </Nombre>
+			<FechaNacimiento>7/01/1999</FechaNacimiento>
+		</ClienteCumpleaños>
+		<ClienteCumpleaños>
+			<Nombre>Xhunik Miguel</Nombre>
+			<FechaNacimiento>5/10/2002</FechaNacimiento>
+		</ClienteCumpleaños>
+		<ClienteCumpleaños>
+			<Nombre>Brandon Pozuelos</Nombre>
+			<FechaNacimiento>2/08/1997</FechaNacimiento>
+		</ClienteCumpleaños>
+		<ClienteCumpleaños>
+			<Nombre>Abdul Chacón</Nombre>
+			<FechaNacimiento>12/12/1998</FechaNacimiento>
+		</ClienteCumpleaños>
+		<ClienteCumpleaños>
+			<Nombre>Carlos Paz</Nombre>
+			<FechaNacimiento>12/03/1999</FechaNacimiento>
+		</ClienteCumpleaños>
+		<ClienteCumpleaños>
+			<Nombre>Daniel Castellanos</Nombre>
+			<FechaNacimiento>10/06/1998</FechaNacimiento>
+		</ClienteCumpleaños>
+		<ClienteCumpleaños>
+			<Nombre>Juan Gaitan</Nombre>
+			<FechaNacimiento>1/04/1998</FechaNacimiento>
+		</ClienteCumpleaños>
+	</ReporteCumpleañeros>
+	<ReporteJuegos>
+		<Juego>
+			<Nombre>Nba2k</Nombre>
+			<Stock>60</Stock>
+		</Juego>
+		<Juego>
+			<Nombre>Mario kart</Nombre>
+			<Stock>40</Stock>
+		</Juego>
+		<Juego>
+			<Nombre>Bloodborne </Nombre>
+			<Stock>40</Stock>
+		</Juego>
+		<Juego>
+			<Nombre>Minecraft</Nombre>
+			<Stock>30</Stock>
+		</Juego>
+		<Juego>
+			<Nombre>Uncharted 5</Nombre>
+			<Stock>20</Stock>
+		</Juego>
+		<Juego>
+			<Nombre>Chegg</Nombre>
+			<Stock>10</Stock>
+		</Juego>
+		<Juego>
+			<Nombre>Banjo-Kazooie</Nombre>
+			<Stock>2</Stock>
+		</Juego>
+		<Juego>
+			<Nombre>Call of Dutty MW3</Nombre>
+			<Stock>2</Stock>
+		</Juego>
+	</ReporteJuegos>
+</Reportes>
+
+                        
